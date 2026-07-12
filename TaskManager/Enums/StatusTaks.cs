@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TaskManager.Enums
 {
-   public enum TaskStatus
+   public enum StatusTaks
     {
         Pedding = 1,
         InProgress = 2,

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Net.Mail;
 
 
@@ -8,7 +9,7 @@ namespace TaskManager.Models
     {
         public string Name { get; private set; }
         public string Email { get; private set; }
-        public List<TaskItem>? Tasks { get; } = [];
+        public ICollection<TaskItem> Tasks { get; private set; } = [];
 
         public User(string name, string email)
         {

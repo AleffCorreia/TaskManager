@@ -3,22 +3,22 @@ using TaskManager.Enums;
 
 namespace TaskManager.Models
 {
-    public class Task: BaseEntity
+    public class TaskItem: BaseEntity
     {
         public string Title { get; private set; }
         public string? Description { get; set; }
         public Priority Priority { get; private set; }
-        public DateTime? CompletedDate { get; set; }
-        public StatusTaks Status { get; private set; }
+        public DateTime? CompletedAt { get; set; }
+        public StatusTask Status { get; private set; }
         public int UserId { get; private set; }
         public User? User { get; private set; }
 
-        public Task(string title, string? description)
+        public TaskItem(string title, string? description)
         {
             ValidateTitle(title);
 
             Title = title;
-            Status = StatusTaks.InProgress;
+            Status = StatusTask.InProgress;
             Priority = Priority.Medium;
             Description = description;
 
@@ -35,13 +35,13 @@ namespace TaskManager.Models
         {
             ValidadeStatusCompletedOrCanceled();
 
-            Status = StatusTaks.Complete;
+            Status = StatusTask.Complete;
         }
 
         public void Cancel()
         {
             ValidadeStatusCompletedOrCanceled();
-            Status = StatusTaks.Canceled;
+            Status = StatusTask.Canceled;
         }
 
         public void ChangePriority(Priority priority)
@@ -59,10 +59,10 @@ namespace TaskManager.Models
 
         public void Start()
         {
-            if (Status != StatusTaks.InProgress)
+            if (Status != StatusTask.InProgress)
                 throw new InvalidOperationException($"This task cannot be started because its status is {Status}.");
 
-            Status = StatusTaks.InProgress;
+            Status = StatusTask.InProgress;
         }
 
         public void ChangeTitle(string title)
@@ -78,7 +78,7 @@ namespace TaskManager.Models
         }
         private void ValidadeStatusCompletedOrCanceled()
         {
-            if (Status == StatusTaks.Complete || Status == StatusTaks.Canceled)
+            if (Status == StatusTask.Complete || Status == StatusTask.Canceled)
                 throw new InvalidOperationException("Cancelled or Complete tasks cannot be change.");
         }
 

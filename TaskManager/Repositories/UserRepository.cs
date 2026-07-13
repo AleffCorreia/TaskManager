@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TaskManager.Repositories.Interfaces
+namespace TaskManager.Repositories
 {
     internal class UserRepository
     {

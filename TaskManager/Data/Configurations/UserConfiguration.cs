@@ -38,8 +38,6 @@ namespace TaskManager.Data.Configurations
                 .HasForeignKey(t => t.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
-
         }
     }
 }

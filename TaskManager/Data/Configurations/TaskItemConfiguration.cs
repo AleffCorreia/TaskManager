@@ -31,16 +31,11 @@ namespace TaskManager.Data.Configurations
 
             builder
                 .Property(t => t.Priority)
-                .IsRequired()
-                .HasDefaultValue(Priority.Medium);
-
-            builder
-                .Property(t => t.CompletedAt);
+                .IsRequired();
 
             builder
                 .Property(t => t.Status)
-                .IsRequired()
-                .HasDefaultValue(StatusTask.Pedding);
+                .IsRequired();
 
             builder
                 .HasOne(t => t.User)

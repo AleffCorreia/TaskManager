@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TaskManager.Models;
-using TaskManager.Repositories.Interfaces;
 
 namespace TaskManager.Interfaces
 {
@@ -11,6 +10,6 @@ namespace TaskManager.Interfaces
     {
         User? GetByEmail(string email);
 
-        bool existsByEmail(string email);
+        bool ExistsByEmail(string email);
     }
 }

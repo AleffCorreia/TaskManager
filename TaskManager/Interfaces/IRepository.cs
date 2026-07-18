@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TaskManager.Interfaces
 {
@@ -16,6 +12,6 @@ namespace TaskManager.Interfaces
 
         List<T> GetAll();
 
-        T GetById(int id);
+        T? GetById(int id);
     }
 }

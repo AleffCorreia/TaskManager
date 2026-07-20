@@ -10,6 +10,8 @@ namespace TaskManager.Interfaces
         List<TaskItem> GetByPriority(Priority priority);
         List<TaskItem> GetByUserId(int userId);
         List<TaskItem> GetByDateRange(DateTime startDate, DateTime? endDate);
+
+        bool ExistsByUserId(int id);
         
     }
 }

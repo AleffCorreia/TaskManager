@@ -27,7 +27,7 @@ namespace TaskManager.Repositories
         public List<TaskItem> GetByPriority(Priority priority)
         {
             return _context
-                        .Set<TaskItem>()
+                        .TaskItems
                         .Where(t => t.Priority == priority)
                         .ToList();
         }
@@ -35,7 +35,7 @@ namespace TaskManager.Repositories
         public List<TaskItem> GetByUserId(int userId)
         {
             return _context
-                        .Set<TaskItem>()
+                        .TaskItems
                         .Where(t => t.UserId == userId)
                         .ToList();
         }
@@ -43,12 +43,19 @@ namespace TaskManager.Repositories
         public List<TaskItem> GetByDateRange(DateTime startDate, DateTime? endDate)
         {
             return _context
-                        .Set<TaskItem>()
+                        .TaskItems
                         .Where(t => 
                             t.CompletedAt.HasValue && 
                             t.CompletedAt >= startDate && 
                             t.CompletedAt <= endDate)
                         .ToList();
+        }
+
+        public bool ExistsByUserId(int userId)
+        {
+            return _context
+                        .TaskItems
+                        .Any(t => t.UserId == userId);
         }
     }
 }

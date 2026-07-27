@@ -3,14 +3,14 @@ using TaskManager.Enums;
 
 namespace TaskManager.Models
 {
-    public class TaskItem: BaseEntity
+    public class TaskItem : BaseEntity
     {
         public string Title { get; private set; }
         public string? Description { get; set; }
         public Priority Priority { get; private set; }
         public DateTime? CompletedAt { get; set; }
         public StatusTask Status { get; private set; }
-        public int UserId { get; private set; }
+        public int? UserId { get; private set; }
         public User? User { get; private set; }
 
         public TaskItem(string title, string? description)
@@ -28,20 +28,25 @@ namespace TaskManager.Models
         {
             if (string.IsNullOrWhiteSpace(title))
                 throw new ArgumentException("Title cannot be empty or whitespace.", nameof(title));
-            
+
         }
 
         public void Complete()
         {
             ValidadeStatusCompletedOrCanceled();
 
+            if (UserId == null)
+                throw new InvalidOperationException("Task not assigned to any user.");
+
             Status = StatusTask.Complete;
+            CompletedAt = DateTime.UtcNow;
         }
 
         public void Cancel()
         {
             ValidadeStatusCompletedOrCanceled();
             Status = StatusTask.Canceled;
+            CompletedAt = DateTime.UtcNow;
         }
 
         public void ChangePriority(Priority priority)
@@ -61,6 +66,9 @@ namespace TaskManager.Models
         {
             if (Status != StatusTask.InProgress)
                 throw new InvalidOperationException($"This task cannot be started because its status is {Status}.");
+
+            if (UserId == null)
+                throw new InvalidOperationException("Task not assigned to any user.");
 
             Status = StatusTask.InProgress;
         }
@@ -83,5 +91,5 @@ namespace TaskManager.Models
         }
 
     }
-    
+
 }

@@ -26,6 +26,7 @@ namespace TaskManager.Services
 
         public void Update(int id, string name, string email)
         {
+            
             var user = _userRepository.GetById(id);
             if(user == null)
                 throw new KeyNotFoundException($"No records for id: {id}");
@@ -70,5 +71,7 @@ namespace TaskManager.Services
 
             return user;
         }
+
+        
     }
 }

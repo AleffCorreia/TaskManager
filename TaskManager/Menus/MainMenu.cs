@@ -2,43 +2,58 @@
 using System.Collections.Generic;
 using System.Text;
 using TaskManager.Enums;
+using TaskManager.Services;
 
 namespace TaskManager.Menus
 {
-    public class MainMenu
+    public class MainMenu : BaseMenu
     {
+
+        private readonly IUserService _userService;
+        private readonly ITaskItemService _taskItemService;
         private readonly DashboardMenu _dashboardMenu = new();
+        private readonly UserMenu _userMenu;
+        private readonly TaskItemMenu _taskItemMenu;
+        public MainMenu(IUserService userService, ITaskItemService taskItemService)
+        {
+            _userService = userService;
+            _taskItemService = taskItemService;
+
+            _userMenu = new UserMenu(userService);
+            _taskItemMenu = new TaskItemMenu(taskItemService);
+        }
      
         public void Show()
         {
             var option = MenuOption.None;
             do
             {
-                Console.Clear();
-                Console.WriteLine("=========================\n\nTask Manager\n\n=========================");
-                Console.WriteLine("1. User");
-                Console.WriteLine("2. Task");
-                Console.WriteLine("3. Dashboard");
-                Console.WriteLine("4. Exit");
-
-                Enum.TryParse<MenuOption>(Console.ReadLine(), out option);
+                
+                PrintHeader("Main Menu");
+                Console.WriteLine("1.       User");
+                Console.WriteLine("2.       Task");
+                Console.WriteLine("3.       Dashboard");
+                Console.WriteLine("4.       Exit");
+                if(!Enum.TryParse<MenuOption>(Console.ReadLine(), out option))
+                {
+                    InvalidOption();
+                    continue;
+                }
 
                 switch (option)
                 {
                     case MenuOption.User:
-                        //Users menu here
+                        _userMenu.Show();
                         break;
                     case MenuOption.Task:
-                        //Tasks option here
+                        _taskItemMenu.Show();
                         break;
                     case MenuOption.Dashboard:
                         _dashboardMenu.Show();
                         break;
                     case MenuOption.Exit:
                         Console.WriteLine("Exiting the application...");
-                        break;
-                    default:
-                        Console.WriteLine("Invalid option. Please try again.");
+                        Pause();
                         break;
                 }
             } while (option != MenuOption.Exit);

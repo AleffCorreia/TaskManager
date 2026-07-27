@@ -40,22 +40,31 @@ namespace TaskManager.Repositories
                         .ToList();
         }
 
-        public List<TaskItem> GetByDateRange(DateTime startDate, DateTime? endDate)
-        {
-            return _context
-                        .TaskItems
-                        .Where(t => 
-                            t.CompletedAt.HasValue && 
-                            t.CompletedAt >= startDate && 
-                            t.CompletedAt <= endDate)
-                        .ToList();
-        }
-
         public bool ExistsByUserId(int userId)
         {
             return _context
                         .TaskItems
                         .Any(t => t.UserId == userId);
         }
+
+        public override List<TaskItem> GetAll()
+        {
+            return 
+                _context
+                .TaskItems
+                .Include(t => t.User)
+                .ToList();
+        }
+
+        public override TaskItem? GetById(int id)
+        {
+            return 
+                _context
+                .TaskItems
+                .Include(t => t.User)
+                .SingleOrDefault(t => t.Id == id);
+        }
+
+       
     }
 }

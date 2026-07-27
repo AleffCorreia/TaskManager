@@ -5,15 +5,14 @@ namespace TaskManager.Data
 {
     public class AppDbContext : DbContext
     {
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+            
+        }
         public DbSet<User> Users => Set<User>();
 
         public DbSet<TaskItem> TaskItems => Set<TaskItem>();
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Data Source=TaskManager.db");
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

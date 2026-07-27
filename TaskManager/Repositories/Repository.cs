@@ -18,12 +18,12 @@ namespace TaskManager.Repositories
             _context = context;
         }
 
-        public List<T> GetAll()
+        public virtual List<T> GetAll()
         {
             return _context.Set<T>().ToList();
         }
 
-        public T? GetById(int id)
+        public virtual T? GetById(int id)
         {
             return _context.Set<T>().FirstOrDefault(x => x.Id == id);
         }

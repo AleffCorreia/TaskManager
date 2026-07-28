@@ -9,7 +9,6 @@ namespace TaskManager.Enums
         None = 0,
         User = 1,
         Task = 2,
-        Dashboard = 3,
-        Exit = 4
+        Exit = 3
     }
 }

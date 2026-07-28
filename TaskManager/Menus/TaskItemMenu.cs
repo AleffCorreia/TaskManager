@@ -224,15 +224,11 @@ namespace TaskManager.Menus
 
                                 if(tasks.Count == 0)
                                     return;
-                                    
+
                                 PrintTaskTable(tasks);
 
                             });
                             break;
-
-
-
-
                 }
 
             } while (option != TaskItemMenuOption.Goback);

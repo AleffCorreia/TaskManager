@@ -7,10 +7,10 @@ namespace TaskManager.Menus
     {
         protected void PrintHeader(string menuTitle)
         {
-            Console.Clear();
-            Console.WriteLine("=====================================\n");
+            Console.WriteLine("=====================================");
             Console.WriteLine($"TaskManager - {menuTitle}");
-            Console.WriteLine("\n=====================================\n");
+            Console.WriteLine("=====================================");
+
         }
 
         protected string? Read(string optionText)
